@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/mine-sweeper/static/css/main.9d5b29c0.chunk.css",
+    "main.js": "/mine-sweeper/static/js/main.184acd58.chunk.js",
+    "main.js.map": "/mine-sweeper/static/js/main.184acd58.chunk.js.map",
+    "runtime-main.js": "/mine-sweeper/static/js/runtime-main.057bacea.js",
+    "runtime-main.js.map": "/mine-sweeper/static/js/runtime-main.057bacea.js.map",
+    "static/js/2.8a61ad59.chunk.js": "/mine-sweeper/static/js/2.8a61ad59.chunk.js",
+    "static/js/2.8a61ad59.chunk.js.map": "/mine-sweeper/static/js/2.8a61ad59.chunk.js.map",
+    "static/js/3.a49eda77.chunk.js": "/mine-sweeper/static/js/3.a49eda77.chunk.js",
+    "static/js/3.a49eda77.chunk.js.map": "/mine-sweeper/static/js/3.a49eda77.chunk.js.map",
+    "index.html": "/mine-sweeper/index.html",
+    "static/css/main.9d5b29c0.chunk.css.map": "/mine-sweeper/static/css/main.9d5b29c0.chunk.css.map",
+    "static/js/2.8a61ad59.chunk.js.LICENSE.txt": "/mine-sweeper/static/js/2.8a61ad59.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/mine-sweeper/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.057bacea.js",
+    "static/js/2.8a61ad59.chunk.js",
+    "static/css/main.9d5b29c0.chunk.css",
+    "static/js/main.184acd58.chunk.js"
+  ]
+}
