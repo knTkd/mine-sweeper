@@ -9,10 +9,13 @@ class Game extends React.Component {
     const status = 'Hello!';
     return (
 	<div className="game">
-	</dive>
 
 	<div className="game-info">
+
 	<div>{status}</div>
+
+	</div>
+	
 	</div>
     );
   }
