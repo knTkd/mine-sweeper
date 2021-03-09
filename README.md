@@ -1,5 +1,8 @@
-# Reactでマインスイーパーを
-## [ページ](https://kntkd.github.io/mine-sweeper)
+# Reactでマインスイーパーを作ってみた [ページ](https://kntkd.github.io/mine-sweeper)
+React 公式チュートリアルの三目並べが終わって、なんとなくつくりたくなったので
+複数のボタンを作るときにfor文でまとめて作る方法がわからなかったので全部ベタで書いたり、盤の情報を二次元配列で管理する方法をめんどくさがって一次元配列でやったりと、本来ならPrivateにしたかった。（Github Pagesを使いたかったので仕方なくPublicにしてる）
+
+
 
 # Getting Started with Create React App
 
