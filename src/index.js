@@ -95,13 +95,16 @@ class Board extends React.Component {
 }
 
 function encode(i) {
+  // iを何列、何行に直す
+  // 8 -> [1, 2]
   return [Math.floor(i / 7) + 1, i % 7 + 1];
 }
 
 function decode(h, w) {
+  // 何列・何行を一次元に直す
+  // [2, 3] -> 9
   return (h - 1) * 7 + w - 1;
 }
-  
 
 class Game extends React.Component {
   constructor(props) {
@@ -111,7 +114,7 @@ class Game extends React.Component {
     for (let i = 0; i < Math.floor(49 * 1 / 3); i++)
       bombs[Math.floor(Math.random() * 49)] = 1;
 
-    let noBombCount = 0;
+    let noBombCount = 0;  // 爆弾じゃない場所の数 クリアの判定で使う
 
     for (let i = 0; i < 49; i++) {
       if (bombs[i] == 1)  continue;
@@ -131,18 +134,19 @@ class Game extends React.Component {
     }
 
     this.state = {
-      squares: Array(49).fill(null),
-      berried: Array(49).fill(false),
-      bombs: bombs,
+      squares: Array(49).fill(null),  // 表示用の文字列
+      berried: Array(49).fill(false), // 掘ったかどうか
+      bombs: bombs,                   // 爆弾の1 もしくは周りの爆弾の数*(-1)
       turnCount: 0,
-      noBombCount: noBombCount,
+      noBombCount: noBombCount,       // 爆弾じゃない場所の数
       status: 'Hello, world!',
     };
   }
 
   handleSquare(i) {
-    let en = encode(i);
+    if (this.state.noBombCount <= 0)  return;
 
+    let en = encode(i);
     let al = 'row = ' + en[0] + '  col = ' + en[1];
     //alert(al);  // 何列・何行をクリックしたかを表示 デバッグ用
 
@@ -154,6 +158,7 @@ class Game extends React.Component {
       return;
     }
     
+    let status = this.state.status;
     let squares = this.state.squares.slice();
     let berried = this.state.berried.slice();
     let noBombCount = this.state.noBombCount;
@@ -164,12 +169,14 @@ class Game extends React.Component {
     if (--noBombCount <= 0) {
       // Game Clear
       alert('Game Clear!  Conguraturation!!');
+      status = 'CLEAR!!!';
     }
 
     this.setState({
       squares: squares,
       berried: berried,
       noBombCount: noBombCount,
+      status: status,
     });
   }
 
