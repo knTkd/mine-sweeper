@@ -94,26 +94,82 @@ class Board extends React.Component {
   }
 }
 
+function encode(i) {
+  return [Math.floor(i / 7) + 1, i % 7 + 1];
+}
+
+function decode(h, w) {
+  return (h - 1) * 7 + w - 1;
+}
+  
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
+
+    let bombs = Array(49).fill(0);  // 爆弾なら1, 違うなら周りの爆弾の数*(-1)
+    for (let i = 0; i < Math.floor(49 * 1 / 3); i++)
+      bombs[Math.floor(Math.random() * 49)] = 1;
+
+    let noBombCount = 0;
+
+    for (let i = 0; i < 49; i++) {
+      if (bombs[i] == 1)  continue;
+      noBombCount += 1;
+      let en = encode(i);
+      let r = en[0], c = en[1];
+      let cnt = 0;
+      for (let ri = -1; ri <= 1; ri++)
+	for (let ci = -1; ci <= 1; ci++) {
+	  if (ri == 0 && ci == 0)  continue;
+	  if (1 > r + ri || r + ri > 7)  continue;
+	  if (1 > c + ci || c + ci > 7)  continue;
+	  if (bombs[decode(r + ri, c + ci)] == 1)
+	    cnt++;
+	}
+      bombs[i] = -cnt;
+    }
+
     this.state = {
-      squares: Array(49).fill('X'),
+      squares: Array(49).fill(null),
+      berried: Array(49).fill(false),
+      bombs: bombs,
       turnCount: 0,
+      noBombCount: noBombCount,
       status: 'Hello, world!',
     };
   }
 
   handleSquare(i) {
-    // alert(String(i));
-    if (i < 0)  return;
-    let status = this.state.status + '!';
+    let en = encode(i);
+
+    let al = 'row = ' + en[0] + '  col = ' + en[1];
+    //alert(al);  // 何列・何行をクリックしたかを表示 デバッグ用
+
+    if (this.state.berried[i])  return;  // もうそこを掘ってたら帰る
+    if (i < 0 || 49 <= i)  return;  // マス外が来たら まず無いけど一応
+    if (this.state.bombs[i] == 1) {
+      // Game Over
+      alert('Game Over!');
+      return;
+    }
+    
     let squares = this.state.squares.slice();
-    squares[i] = 'O';
+    let berried = this.state.berried.slice();
+    let noBombCount = this.state.noBombCount;
+
+    berried[i] = true;
+    squares[i] = String(this.state.bombs[i] * -1);  // 表示用 周りの爆弾の数
+
+    if (--noBombCount <= 0) {
+      // Game Clear
+      alert('Game Clear!  Conguraturation!!');
+    }
+
     this.setState({
       squares: squares,
-      status: status,
+      berried: berried,
+      noBombCount: noBombCount,
     });
   }
 
